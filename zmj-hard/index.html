@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/js.js"></script>
+    <script src="js/index.js"></script>
+    <!--<script src="js/keypan.js" type="text/javascript" charset="utf-8"></script>-->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
+    <title>功能页面</title>
+</head>
+
+<body>
+    <div class="main">
+
+        <div class="top" v-on:mousemove="mousemove">
+            <div class="title">多功能窗口交互终端</div>
+            <div class="title1">硬件功能</div>
+            <img class="close" v-on:click="closecao" src="img/close.png" alt="">
+            <img class="min" v-on:click="min" src="img/min.png" alt="">
+        </div>
+
+        <ul class="left">
+            <li v-on:click="select(1)" v-bind:class="{focus: index == 1}">
+                <img src="img/gpy_icon.png" alt="">
+                <span>高拍仪</span>
+            </li>
+            <li v-on:click="select(2)" v-bind:class="{focus: index == 2}">
+                <img src="img/sxt_icon.png" alt="">
+                <span>前置摄像头</span>
+            </li>
+            <li v-on:click="select(3)" v-bind:class="{focus: index == 3}">
+                <img src="img/sfz_icon.png" alt="">
+                <span>身份证阅读器</span>
+            </li>
+            <li v-on:click="select(4)" v-bind:class="{focus: index == 4}">
+                <img src="img/qmb_icon.png" alt="">
+                <span>电子签名版</span>
+            </li>
+            <li v-on:click="select(5)" v-bind:class="{focus: index == 5}">
+                <img src="img/zwy_icon.png" alt="">
+                <span>指纹采集仪</span>
+            </li>
+            <li v-on:click="select(6)" v-bind:class="{focus: index == 6}">
+                <img src="img/zwy_icon.png" alt="">
+                <span>刷脸登录</span>
+            </li>
+        </ul>
+
+        <div class="center">
+            <!-- 默认页面 -->
+            <div v-if="index == 0" class="page page0">
+                <div class="func_tips">请在左侧选择相应功能</div>
+            </div>
+
+            <!-- 高拍仪 -->
+            <div v-if="index == 1" class="page page1">
+                <div class="page_title">高拍仪</div>
+
+                <img class="video gpy_video" src="img/opencamera.gif" alt="">
+
+                <div v-if="is_gpy" class="btn ok gpy_ok" v-on:click="gpy_click">拍摄</div>
+            </div>
+
+            <!-- 前置摄像头 -->
+            <div v-if="index == 2" class="page page2">
+                <div class="page_title">摄像头</div>
+                <img class="video sxt_video" src="img/opencamera.gif" alt="">
+
+                <div v-if="is_sxt" class="btn ok sxt_ok" v-on:click="sxt_click">拍摄</div>
+            </div>
+
+            <!-- 身份证 -->
+            <div v-if="index == 3" class="page page3">
+                <div class="page_title">身份证</div>
+
+                <div class="idcard">
+                    <div class="name">姓&emsp;&emsp;名：<span contenteditable=true>{{name}}</span></div>
+                    <div class="sex">性&emsp;&emsp;别：<span contenteditable=true>{{sex}}</span></div>
+                    <div class="birthday">出&emsp;&emsp;生：<span contenteditable=true>{{birthday}}</span></div>
+                    <div class="address">住&emsp;&emsp;址：<span contenteditable=true>{{address}}</span></div>
+
+                    <div class="number">身份证号：<span contenteditable=true>{{number}}</span></div>
+                    <div class="nation">民&emsp;&emsp;族：<span contenteditable=true>{{people}}</span></div>
+                    <div class="signoffice">签证机关：<span contenteditable=true>{{signOffice}}</span></div>
+                    <div class="effectivedate">有效期限：<span contenteditable=true>{{effectivedate}}</span></div>
+                </div>
+                <div class="card_photo"><img v-bind:src="photo" alt=""></div>
+                <div v-on:click="card_re" v-if="number != null && number.length == 18" class="btn reset card_re">重刷</div>
+                <div v-on:click="card_ok" v-if="photo" class="btn ok card_ok">保存</div>
+            </div>
+
+            <!-- 签名版 -->
+            <div v-if="index == 4" class="page page4">
+                <div class="page_title">电子签名</div>
+
+                <div class="sign"></div>
+
+                <div v-if="sign" v-on:click="sign_ok" class="btn ok sign_ok">保存</div>
+            </div>
+
+            <!-- 指纹 -->
+            <div v-if="index == 5" class="page page5">
+                <div class="page_title">指纹采集</div>
+
+                <ul class="pf">
+                    <li v-for="(item, index) in fingerPrint">
+                        <div class="pf_image"><img v-bind:src="item.pfBase64" alt=""></div>
+                        <div class="pf_ok ok" v-on:click="savePf(item.pfBase64)">保存指纹</div>
+                    </li>
+                </ul>
+
+                <div v-if="fingerPrint.length > 0" v-on:click="pf_re" class="btn reset pf_re">清空</div>
+            </div>
+            
+            <!-- 后置摄像头 -->
+            <div v-if="index == 6" class="page page6">
+            	<div v-show="sldlgonghao==''">
+            		<div class="page_title">{{loginkind==1?"刷脸登录":"更新登录"}}</div>
+               	 	<img class="video sxt_video" v-show="loginkind==1" v-bind:src="rlsbimg" alt="">
+               	 	<div class="ghlogin" v-show="loginkind==2">
+               	 		<label>工号:</label>
+               	 		<input type="" v-model="ghinput"/>
+               	 		<p style="color: red;font-size: 12px;margin-left: 50px;position: absolute;top: 40px;" v-show="tishibol">{{tishiyu}}</p>
+               	 		<div class="loginbtn" @click="logogh()">登录</div>
+               	 	</div>
+               	 	<div class="qiehuanweizh" @click="loginkindchange()">
+            			{{loginkind!=1?"刷脸登录":"账号登录"}}
+            		</div>
+            	</div>              
+                <div class="sldlsucc" v-show="sldlgonghao!=''">
+                	<h5 class="nowworksta">当前状态：{{aslieveorback==1?"正在服务":"暂时离开"}}</h5>
+                	<p>工号：{{sldlgonghao}}</p>
+                	<p>姓名：{{sldlname}}</p>
+                	<img v-bind:src="sldlhead"/>
+                	<div v-show="aslieveorback==1" class="znashilikai" @click="znashilikai()">暂时离开</div>
+                	<div v-show="aslieveorback==2" class="comebacke" @click="comebacke()">继续服务</div>
+                	<div class="tuichudl" @click="tuichudl()">退出登录</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

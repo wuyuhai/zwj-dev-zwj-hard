@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/js.js"></script>
+    <script src="js/index.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <audio id="dlcg" src="wav/登录成功.wav"></audio>
+    <audio id="ckbcz" src="wav/窗口号不存在.wav"></audio>
+    <audio id="myyg" src="wav/该部门下没有此员工.wav"></audio>
+    <audio id="tcdl" src="wav/退出登录.wav"></audio>
+    <audio id="zzhj" src="wav/正在呼叫.wav"></audio>
+    <audio id="qpj" src="wav/请您对我的服务进行评价.wav"></audio>
+    <audio id="zcfw" src="wav/正常服务.wav"></audio>
+    <audio id="ztfw" src="wav/暂停服务.wav"></audio>
+    <audio id="gxpj" src="wav/感谢您的评价.wav"></audio>
+    <audio id="dlsb" src="wav/登录失败.wav"></audio>
+    <audio id="whm" src="wav/无号码.wav"></audio>
+    <audio id="hjsb" src="wav/呼叫失败.wav"></audio>
+    <audio id="qhcg" src="wav/弃号成功.wav"></audio>
+    <audio id="qhsb" src="wav/弃号失败.wav"></audio>
+    <audio id="wlzd" src="wav/网络中断了.wav"></audio>
+
+    <div class="main">
+        <div class="showClose" v-on:click="showClose"></div>
+
+        <div v-if="timer >= 5" class="close" v-on:click="close">
+            退出系统
+        </div>
+
+        <div class="top">
+            <div class="title">{{govName}}</div>
+            <div class="time">{{time}}</div>
+            <div class="date">{{date}}</div>
+        </div>
+
+        <div class="left">
+            <div class="deptName">{{ workId ? deptName : '暂未登录'}}</div>
+
+            <img v-bind:src="head" class="head" alt="">
+
+            <div v-if="workId" class="worker">
+                <p>姓名：{{workName}}</p>
+                <p>工号：{{workId}}</p>
+                <!--<p>手机号：{{mobile}}</p>-->
+            </div>
+
+            <div v-if="workId" class="evaluate">
+                <p>服务评价：</p>
+                <ul class="star">
+                    <li v-for="index in pingjia"><img src="img/star_red.png" alt=""></li>
+                    <li v-for="index in 5 - pingjia"><img src="img/star_gray.png" alt=""></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="center">
+
+            <div class="page page1" v-if="page == 'page1'">
+                <img v-bind:src="banners[bannerIndex]" alt="" class="banner">
+            </div>
+
+            <div class="page page2" v-if="page == 'page2'">
+                <div class="pj_tip">请您对我的工作给予评价：</div>
+
+                <ul class="pingjia">
+                    <li class="pj" v-on:click="pj(3, '满意')">
+                        <div><img src="img/pj_2.png" alt=""></div>
+                        <p>满意</p>
+                    </li>
+                    <li class="pj" v-on:click="pj(2, '基本满意')">
+                        <div><img src="img/pj_6.png" alt=""></div>
+                        <p>基本满意</p>
+                    </li>
+                    <li class="pj" v-on:click="pj(1, '不满意')" style="margin-right:0px;">
+                        <div><img src="img/pj_5.png" alt=""></div>
+                        <p>不满意</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="page page3" v-if="page == 'page3'">
+                <div class="pj_image">
+                    <img src="img/success_1.png" alt="">
+                </div>
+
+                <div class="pj_success">评价成功</div>
+                <div class="pj_xiexie">感谢您的支持与配合，祝您生活愉快！</div>
+            </div>
+
+            <div class="page page4" v-if="page == 'page4'">
+
+                <div class="stop_icon"></div>
+
+                <div class="stop">暂停服务</div>
+                <div class="stop_detail">{{ligang}}</div>
+            </div>
+        </div>
+
+        <div class="zimu"><span>{{govName}}, 欢迎您</span></div>
+
+        <div class="tipDeng" v-bind:style="{'background-color': dengColor, 'opacity': isLiang ? '1': '0.5'}"></div>
+        <div class="tips">{{tips}}</div>
+        <div class="winId">{{winId}}</div>
+    </div>
+</body>
+
+</html>

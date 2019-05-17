@@ -1,0 +1,306 @@
+.main{
+    width: 950px;
+    height: 650px;
+    background-color: #eae0e0;
+}
+
+body{
+    background-color: antiquewhite;
+}
+
+.top{
+    height: 57px;
+    width: 950px;
+    background-color: #59b8b4;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.title, .title1{
+    font-size: 25px;
+    line-height: 57px;
+    color: #fff;
+    font-weight: bold;
+    position: absolute;
+    left: 26px;
+}
+
+.title1{
+    font-size: 20px;
+    font-weight: normal;
+    left: 270px;
+    line-height: 20px;
+    top: 20px;
+}
+
+.close{
+    position: absolute;
+    right: 16px;
+    top: 15px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    width: 24px;
+}
+
+.close:hover{
+    background-color: #F1707A;
+    border-radius: 50%;
+}
+
+.close:active{
+    background-color: #E81123;
+    border-radius: 50%;
+}
+
+.min{
+    position: absolute;
+    right: 60px;
+    top: 15px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    width: 24px;
+}
+
+.min:hover{
+    background-color: #F1707A;
+    border-radius: 50%;
+}
+
+.min:active{
+    background-color: #E81123;
+    border-radius: 50%;
+}
+
+.left{
+    width: 160px;
+    height: 593px;
+    position: absolute;
+    top: 57px;
+    left: 0;
+    background-color: #383838;
+    list-style: none;
+}
+
+.center{
+    position: absolute;
+    top: 62px;
+    left: 165px;
+    width: 780px;
+    height: 583px;
+    background-color: #fff;
+}
+
+.left>li{
+    height: 65px;
+    border-bottom: 1px solid #343037;
+    text-align: left;
+    line-height: 65px;
+    font-size: 17px;
+    color: #e1e1e1;
+}
+
+.left>li>img{
+    margin-left: 15px;
+    margin-right: 5px;
+}
+
+.left>li>img, .left>li>span{
+    vertical-align: middle;
+}
+
+.left>li:hover{
+    background-color: #8d8a8a;
+    color: #fff;
+}
+
+.left>li.focus{
+    background-color: #606060;
+    color: #fff;
+}
+
+.page{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.page_title{
+    position: absolute;
+    top: 20px;
+    left: 25px;
+    color: #59b8b4;
+    font-size: 21px;
+    line-height: 21px;
+    font-weight: bold;
+}
+.page_title:after{
+    content: "";
+    width: 586px;
+    border-bottom: 1px solid #bfbfbf;
+    display: inline-block;
+    position: absolute;
+    left: 95px;
+    top: 9px;
+}
+
+.sign{
+    width: 480px;
+    height: 300px;
+    border: 2px solid #d9d9d9;
+    position: absolute;
+    top: 130px;
+    left: 150px;
+}
+
+.btn{
+    text-align: center;
+    line-height: 70px;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 17px;
+    width:70px;
+    height:70px;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.reset{
+    background-color: #00a0e9;
+    bottom: 10px;
+    right:100px;
+}
+.reset:hover{
+    background-color: #1298d6;
+}
+.reset:active{
+    background-color: #1d8ec2;
+}
+
+.ok{
+    background-color: #59b8b4;
+    bottom: 10px;
+    right:10px;
+}
+.ok:hover{
+    background-color: #5ba3a0;
+}
+.ok:active{
+    background-color: #5b9492;
+}
+
+.pf{
+    position: absolute;
+    width: 100%;
+    top: 150px;
+    list-style: none;
+    text-align: center;
+}
+
+.pf>li{
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.pf_image{
+    width: 180px;
+    height: 200px;
+    border: 1px solid #d9d9d9;
+}
+.pf_image>img{
+    width: 100%;
+    height: 100%;
+}
+
+.idcard{
+    color: #504b4b;
+    font-size: 20px;
+    line-height: 40px;
+    position: absolute;
+}
+
+.idcard>div{
+    position: absolute;
+    width: 550px;
+}
+
+.name{
+    top: 100px;
+    left: 50px;
+}
+.number{
+    top: 150px;
+    left: 50px;
+}
+
+.sex{
+    top: 200px;
+    left: 50px;
+}
+
+.nation{
+    top: 250px;
+    left: 50px;
+}
+.birthday{
+    top: 300px;
+    left: 50px;
+}
+.address{
+    top: 350px;
+    left: 50px;
+}
+
+.signoffice{
+    top: 400px;
+    left: 50px;
+}
+.effectivedate{
+    top: 450px;
+    left: 50px;
+}
+
+.card_photo{
+    position: absolute;
+    top: 100px;
+    right: 120px;
+    border: 1px solid #444;
+    width: 160px;
+    height: 197px;
+}
+.card_photo>img{
+    width: 100%;
+    height: 100%;
+}
+
+.video{
+    height: 450px;
+    width: 600px;
+    border: 1px solid #000;
+    position: absolute;
+    top: 70px;
+    left: 90px;
+}
+
+.pf_ok{
+    text-align: center;
+    line-height: 40px;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 17px;
+    width:182px;
+    height:40px;
+    margin-top: 5px;
+}
+
+.func_tips{
+    color: #59B8B4;
+    position: absolute;
+    width: 100%;
+    top: 200px;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+}
